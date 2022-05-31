@@ -1,8 +1,8 @@
 #Install tomcat on CentOs
-#Pull the centos from the dockerhub
-FROM centos:latest 
+#Pull the centos from the dockerhub, Please rename file to "Dockerfile" when Using it.
+FROM ubuntu:latest 
 # Install the java
-RUN yum install java -y
+RUN apt install java -y
 #Create a new directory
 RUN mkdir /opt/tomcat
 #Change directory, all commands are executed inside this directory
