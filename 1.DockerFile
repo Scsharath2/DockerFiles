@@ -15,7 +15,7 @@ RUN add-apt-repository ppa:webupd8team/java && \
 
 # Install Java 8
 RUN apt-get update && \
-    apt-get --yes --no-install-recommends install oracle-java8-installer
+    apt install openjdk-8-jdk
 
 #Create a new directory
 RUN mkdir /opt/tomcat
