@@ -4,14 +4,19 @@ FROM ubuntu:latest
 MAINTAINER  Sharath <scsharath2@gmail.com>
 
 # Install the java
+# Install basic software support
 RUN apt-get update && \
-    apt-get upgrade -y && \
-    apt-get install -y  software-properties-common && \
-    add-apt-repository ppa:webupd8team/java -y && \
-    apt-get update && \
-    echo oracle-java7-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections && \
-    apt-get install -y oracle-java8-installer && \
-    apt-get clean
+    apt-get install --yes software-properties-common
+
+# Add the JDK 8 and accept licenses (mandatory)
+RUN add-apt-repository ppa:webupd8team/java && \
+    echo debconf shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \
+    echo debconf shared/accepted-oracle-license-v1-1 seen true | debconf-set-selections
+
+# Install Java 8
+RUN apt-get update && \
+    apt-get --yes --no-install-recommends install oracle-java8-installer
+
 #Create a new directory
 RUN mkdir /opt/tomcat
 #Change directory, all commands are executed inside this directory
