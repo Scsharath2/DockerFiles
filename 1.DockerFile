@@ -9,13 +9,13 @@ RUN apt-get update && \
     apt-get install --yes software-properties-common
 
 # Add the JDK 8 and accept licenses (mandatory)
-RUN add-apt-repository ppa:webupd8team/java && \
+RUN add-apt-repository ppa:ts.sch.gr/ppa && \
     echo debconf shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \
     echo debconf shared/accepted-oracle-license-v1-1 seen true | debconf-set-selections
 
 # Install Java 8
 RUN apt-get update && \
-    apt install openjdk-8-jdk
+    apt-get --yes --no-install-recommends install oracle-java8-installer
 
 #Create a new directory
 RUN mkdir /opt/tomcat
