@@ -1,8 +1,17 @@
 #Install tomcat on CentOs
 #Pull the centos from the dockerhub, Please rename file to "Dockerfile" when Using it.
-FROM ubuntu:latest 
+FROM ubuntu:latest
+MAINTAINER  Sharath <scsharath2@gmail.com>
+
 # Install the java
-RUN apt install java -y
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    apt-get install -y  software-properties-common && \
+    add-apt-repository ppa:webupd8team/java -y && \
+    apt-get update && \
+    echo oracle-java7-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections && \
+    apt-get install -y oracle-java8-installer && \
+    apt-get clean
 #Create a new directory
 RUN mkdir /opt/tomcat
 #Change directory, all commands are executed inside this directory
